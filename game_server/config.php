@@ -9,6 +9,9 @@ $chain = ["en", "ja", "ar", "fi", "sw", "hu", "ko", "en"]; // the translation ch
 
 $hof_threshold = 60;                                       // min mangle score to enter the Hall of Fame
 
+$min_mangle = 30;                                          // re-roll rounds below this score so every round is visibly mangled
+$max_reroll_attempts = 4;                                  // cap the re-rolls (each one runs the chain), then show the best so far
+
 // translation provider:
 //   "mymemory" = free, no key (default)
 //   "claude"   = Anthropic, needs ANTHROPIC_API_KEY in .env
