@@ -2,85 +2,29 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewpoint" content="width=device-width", initial-scale="1.0">
-        <title>
-            Lost in Translation | Hall of Fame
-        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lost in Translation | Hall of Fame</title>
         <link rel="stylesheet" href="../styles/hall-of-fame.css">
     </head>
     <body>
-  <header class="game-header">
-    <a class="game-logo" href="../../index.html">
-      LOST IN <span>TRANSLATION</span>
-    </a>
-
-    <a class="hall-link" href="game.html">
-      ← Back to game
-    </a>
-  </header>
-
-    <main class="hall-page">
-        <section class="hall-intro">
-        <p class="section-label">ARCHIVED SIGNALS</p>
-        <h1>Hall of Fame</h1>
-        <p>
-            The most badly mangled phrases recovered from the translation chain.
-        </p>
-        </section>
-
-        <div class="sort-buttons">
-        <button class="sort-button active" type="button">
-            Most mangled
-        </button>
-
-        <button class="sort-button" type="button">
-            Most voted
-        </button>
-    </div>
-
-        <section class="hall-list">
-         <div class="hall-head">
-            <span>Rank</span>
-            <span>Mangled phrase</span>
-            <span>Original phrase</span>
-            <span>Mangle score</span>
-            <span>Votes</span>
-            <span>Vote</span>
-        </div>
-
-        <article class="hall-row">
-            <strong class="rank gold">1</strong>
-            <p class="mangled">I before e, except after caffeine</p>
-            <p class="original">I before E, except after C</p>
-            <strong class="mangle-score">98<span>/100</span></strong>
-            <span class="votes">2,493</span>
-            <button class="upvote-button" type="button">Upvote</button>
-        </article>
-
-         <article class="hall-row">
-            <strong class="rank silver">2</strong>
-            <p class="mangled">Don't cry over spilled milkshake</p>
-            <p class="original">Don't cry over spilled milk</p>
-            <strong class="mangle-score">94<span>/100</span></strong>
-            <span class="votes">1,872</span>
-            <button class="upvote-button" type="button">Upvote</button>
-        </article>
-
-        <article class="hall-row">
-            <strong class="rank bronze">3</strong>
-            <p class="mangled">A rolling home gathers no moss</p>
-            <p class="original">A rolling stone gathers no moss</p>
-            <strong class="mangle-score">93<span>/100</span></strong>
-            <span class="votes">1,521</span>
-            <button class="upvote-button" type="button">Upvote</button>
-        </article>
-        </section>
-
-        <p class="vote-note">
-        One vote per player is enforced by the server.
-        </p>
-    </main>
-
-    <script src="../scripts/hall-of-fame.js"></script>
+        <header class="game-header">
+            <a class="game-logo" href="../../index.html">LOST IN <span>TRANSLATION</span></a>
+            <a class="hall-link" href="game.html">← Back to game</a>
+        </header>
+        <main class="hall-page">
+            <section class="hall-intro"><p class="section-label">ARCHIVED SIGNALS</p><h1>Hall of Fame</h1><p>The most badly mangled phrases recovered from the translation chain.</p></section>
+            <div class="sort-buttons">
+                <button class="sort-button active" type="button" data-sort="mangle">Most mangled</button>
+                <button class="sort-button" type="button" data-sort="votes">Most voted</button>
+            </div>
+            <section class="hall-list">
+                <div class="hall-head"><span>Rank</span><span>Mangled phrase</span><span>Original phrase</span><span>Mangle score</span><span>Votes</span><span>Vote</span></div>
+                <div id="hall-results" aria-live="polite"></div>
+            </section>
+            <p class="vote-note">One vote per player is enforced by the server.</p>
+        </main>
+        <script src="../scripts/api.js"></script>
+        <script src="../scripts/user.js"></script>
+        <script src="../scripts/hall-of-fame.js"></script>
     </body>
 </html>

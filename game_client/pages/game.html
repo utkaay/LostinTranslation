@@ -8,152 +8,62 @@
     </head>
     <body>
         <header class="game-header">
-            <a class="game-logo" href="../../index.html">
-                LOST IN <span>TRANSLATION</span>
-            </a>
-
+            <a class="game-logo" href="../../index.html">LOST IN <span>TRANSLATION</span></a>
             <section class="hud" aria-label="Round status">
-                <div class="hud-item timer">
-                    <p>Time remaining</p>
-                    <strong id="timer">01:00</strong>
-                </div>
-
-                <div class="hud-item">
-                    <p>Round</p>
-                    <strong id="round-progress">0 / 5</strong>
-                </div>
-
-                <div class="hud-item score">
-                    <p>Score</p>
-                    <strong id="score">0</strong>
-                </div>
+                <div class="hud-item timer"><p>Time remaining</p><strong id="timer">01:00</strong></div>
+                <div class="hud-item"><p>Round</p><strong id="round-progress">0 / 5</strong></div>
+                <div class="hud-item score"><p>Score</p><strong id="score">0</strong></div>
             </section>
-
-            <a class="hall-link" href="hall-of-fame.html">
-                Hall of Fame
-            </a>
+            <a class="hall-link" href="hall-of-fame.html">Hall of Fame</a>
         </header>
         <main>
-
             <section class="transmission-panel">
                 <p class="panel-label">Corrupted transmission</p>
-                <h1 class="mangled-phrase">
-                    The dress is blue.
-                </h1>
-
-                <p class="panel-description">
-                    Decode the original English phrase before time expires.
-                </p>
+                <h1 class="mangled-phrase" id="mangled-phrase">Loading transmission…</h1>
+                <p class="panel-description" id="panel-description">Preparing a new translation chain.</p>
             </section>
-
             <section class="translation-route">
                 <h2>Translation route</h2>
-
                 <div class="route-nodes" role="list" aria-label="Translation route">
-                    <div class="route-node active" role="listitem"><span>EN</span><small>1</small></div>
-                    <span class="route-line"></span>
-
-                    <div class="route-node" role="listitem"><span>JA</span><small>2</small></div>
-                    <span class="route-line"></span>
-
-                    <div class="route-node" role="listitem"><span>AR</span><small>3</small></div>
-                    <span class="route-line"></span>
-
-                    <div class="route-node" role="listitem"><span>FI</span><small>4</small></div>
-                    <span class="route-line"></span>
-
-                    <div class="route-node" role="listitem"><span>SW</span><small>5</small></div>
-                    <span class="route-line"></span>
-
-                    <div class="route-node" role="listitem"><span>HU</span><small>6</small></div>
-                    <span class="route-line"></span>
-
-                    <div class="route-node" role="listitem"><span>KO</span><small>7</small></div>
-                    <span class="route-line"></span>
-
+                    <div class="route-node active revealed" role="listitem"><span>EN</span><small>1</small></div><span class="route-line"></span>
+                    <div class="route-node" role="listitem"><span>JA</span><small>2</small></div><span class="route-line"></span>
+                    <div class="route-node" role="listitem"><span>AR</span><small>3</small></div><span class="route-line"></span>
+                    <div class="route-node" role="listitem"><span>FI</span><small>4</small></div><span class="route-line"></span>
+                    <div class="route-node" role="listitem"><span>SW</span><small>5</small></div><span class="route-line"></span>
+                    <div class="route-node" role="listitem"><span>HU</span><small>6</small></div><span class="route-line"></span>
+                    <div class="route-node" role="listitem"><span>KO</span><small>7</small></div><span class="route-line"></span>
                     <div class="route-node" role="listitem"><span>EN</span><small>8</small></div>
                 </div>
             </section>
-
             <form class="decode-console">
                 <label for="guess-input">Your decode</label>
-
-                <input
-                    id="guess-input"
-                    type="text"
-                    maxlength="120"
-                    placeholder="Type your decode here..."
-                    required
-                >
-
-                <button class="hint-button" type="button">
-                    Use trace <span>30</span>
-                </button>
-
-                <button class="submit-button" type="submit">
-                    Submit decode
-                </button>
+                <input id="guess-input" type="text" maxlength="120" placeholder="Type your decode here…" required>
+                <button class="hint-button" type="button">Use trace <span>30</span></button>
+                <button class="submit-button" type="submit">Submit decode</button>
             </form>
-
-            <p class="feedback-message" id="feedback-message" aria-live="polite"></p>
-
+            <p class="feedback-message" id="feedback-message" aria-live="polite" data-status="info"></p>
             <section class="replay-feed">
-                <div class="replay-heading">
-                    <h2>Replay feed</h2>
-                    <p>The full journey unlocks when the round ends.</p>
-                </div>
-
+                <div class="replay-heading"><h2>Replay feed</h2><p>The full journey unlocks when the round ends.</p></div>
                 <div class="replay-cards" role="list" aria-label="Replay feed">
-                    <article class="replay-card active" role="listitem">
-                        <span class="step-number">01</span>
-                        <h3>EN → JA</h3>
-                        <p>Active</p>
-                    </article>
-
-                    <article class="replay-card locked" role="listitem">
-                        <span class="step-number">02</span>
-                        <h3>JA → AR</h3>
-                        <p>Locked</p>
-                    </article>
-
-                    <article class="replay-card locked" role="listitem">
-                        <span class="step-number">03</span>
-                        <h3>AR → FI</h3>
-                        <p>Locked</p>
-                    </article>
-
-                    <article class="replay-card locked" role="listitem">
-                        <span class="step-number">04</span>
-                        <h3>FI → SW</h3>
-                        <p>Locked</p>
-                    </article>
-
-                    <article class="replay-card locked" role="listitem">
-                        <span class="step-number">05</span>
-                        <h3>SW → HU</h3>
-                        <p>Locked</p>
-                    </article>
-
-                    <article class="replay-card locked" role="listitem">
-                        <span class="step-number">06</span>
-                        <h3>HU → KO</h3>
-                        <p>Locked</p>
-                    </article>
-
-                    <article class="replay-card locked" role="listitem">
-                        <span class="step-number">07</span>
-                        <h3>KO → EN</h3>
-                        <p>Locked</p>
-                    </article>
-
-                    <article class="replay-card locked" role="listitem">
-                        <span class="step-number">08</span>
-                        <h3>Final English</h3>
-                        <p>Locked</p>
-                    </article>
+                    <article class="replay-card active" role="listitem"><span class="step-number">01</span><h3>EN → JA</h3><p>Awaiting trace</p></article>
+                    <article class="replay-card locked" role="listitem"><span class="step-number">02</span><h3>JA → AR</h3><p>Locked</p></article>
+                    <article class="replay-card locked" role="listitem"><span class="step-number">03</span><h3>AR → FI</h3><p>Locked</p></article>
+                    <article class="replay-card locked" role="listitem"><span class="step-number">04</span><h3>FI → SW</h3><p>Locked</p></article>
+                    <article class="replay-card locked" role="listitem"><span class="step-number">05</span><h3>SW → HU</h3><p>Locked</p></article>
+                    <article class="replay-card locked" role="listitem"><span class="step-number">06</span><h3>HU → KO</h3><p>Locked</p></article>
+                    <article class="replay-card locked" role="listitem"><span class="step-number">07</span><h3>KO → EN</h3><p>Locked</p></article>
+                    <article class="replay-card locked" role="listitem"><span class="step-number">08</span><h3>Original English</h3><p>Locked</p></article>
                 </div>
             </section>
+            <div class="round-action" id="round-action" aria-live="polite"></div>
         </main>
+        <script src="../scripts/api.js"></script>
+        <script src="../scripts/user.js"></script>
+        <script src="../scripts/score.js"></script>
+        <script src="../scripts/reveal.js"></script>
+        <script src="../scripts/hint.js"></script>
+        <script src="../scripts/round.js"></script>
+        <script src="../scripts/submit.js"></script>
         <script src="../scripts/game-page.js"></script>
     </body>
 </html>

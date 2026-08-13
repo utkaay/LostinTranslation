@@ -2,64 +2,36 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name ="viewport" content="width=device-width, initial-scale=1.0">
-        <title> Lost in Translation </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lost in Translation</title>
         <link rel="stylesheet" href="game_client/styles/landing-page.css">
     </head>
     <body>
         <header class="site-header">
-            <a class="site-logo" href="index.html">
-                Lost in <span>Translation</span>
-            </a>
-            <nav>
-                <a href="#how-it-works">How it works</a>
-                <a href="game_client/pages/hall-of-fame.html">Hall of Fame</a>
-            </nav>
+            <a class="site-logo" href="index.html">Lost in <span>Translation</span></a>
+            <nav><a href="#how-it-works">How it works</a><a href="game_client/pages/hall-of-fame.html">Hall of Fame</a></nav>
         </header>
         <main>
-            </h1>
             <section class="hero">
                 <p class="eyebrow">A TRANSLATION ADVENTURE</p>
-                <h1> Decode the signal.
-                <span> Recover the meaning</span>
-                </h1>
-                <p class="hero-text">
-                    An English phrase travels through seven languages and returns
-                    mangled. Your mission is to guess the original phrase.
-                    </p>
-                    <div class="hero-buttons">
-                        <a class="primary-button" href="game_client/pages/game.html">
-                            Start a round
-                         </a>
-                        <a class="secondary-button" href="#how-it-works">
-                            How it works
-                            </a>
-                            </div>    
-                        </section>
-
-                        <section class="how-it-works" id="how-it-works">
-                            <p class="eyebrow">MISSION BRIEF</p>
-                            <h2>How the game works</h2>
-                            <div class="steps">
-                                <article>
-                                    <span>01</span>
-                                    <h3>Intercept</h3>
-                                    <p>You receive a phrase damaged by a chain of translations.</p>
-                                    </article>
-                                    <article>
-                                        <span>02</span>
-                                        <h3>Decode</h3>
-                                        <p>Submit your best guess before the round timer reaches zero.</p>
-                                        </article>
-                                        <article>
-                                            <span>03</span>
-                                            <h3>Replay</h3>
-                                            <p>Watch each language step reveal where the phrase changed.</p>
-                                            </article>
-                                            </div>
-                                         </section>
-                                    </main>
-                               <script src="game_client/scripts/landing-page.js"></script>
-                            </body>
-                         </html>
-                                        
+                <h1>Decode the signal.<span>Recover the meaning</span></h1>
+                <p class="hero-text">An English phrase travels through seven languages and returns mangled. Your mission is to guess the original phrase.</p>
+                <div class="hero-buttons">
+                    <a class="primary-button" id="start-game" href="game_client/pages/game.html">Start a round</a>
+                    <a class="secondary-button" href="#how-it-works">How it works</a>
+                </div>
+                <p class="session-message" id="session-message" aria-live="polite"></p>
+            </section>
+            <section class="how-it-works" id="how-it-works">
+                <p class="eyebrow">MISSION BRIEF</p><h2>How the game works</h2>
+                <div class="steps">
+                    <article><span>01</span><h3>Intercept</h3><p>You receive a phrase damaged by a chain of translations.</p></article>
+                    <article><span>02</span><h3>Decode</h3><p>Submit your best guess before the round timer reaches zero.</p></article>
+                    <article><span>03</span><h3>Replay</h3><p>Watch each language step reveal where the phrase changed.</p></article>
+                </div>
+            </section>
+        </main>
+        <script src="game_client/scripts/user.js"></script>
+        <script src="game_client/scripts/landing-page.js"></script>
+    </body>
+</html>
