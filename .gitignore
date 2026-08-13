@@ -1,0 +1,11 @@
+# Secrets — never commit (DB password + Anthropic API key live here)
+game_server/.env
+
+# Runtime logs
+game_server/*.log
+game_server/logs/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
