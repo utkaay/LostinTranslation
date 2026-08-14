@@ -25,10 +25,48 @@
             <section class="how-it-works" id="how-it-works">
                 <p class="eyebrow">MISSION BRIEF</p><h2>How the game works</h2>
                 <div class="steps">
-                    <article><span>01</span><h3>Intercept</h3><p>You receive a phrase damaged by a chain of translations.</p></article>
-                    <article><span>02</span><h3>Decode</h3><p>Submit your best guess before the round timer reaches zero.</p></article>
-                    <article><span>03</span><h3>Replay</h3><p>Watch each language step reveal where the phrase changed.</p></article>
+                    <article>
+                        <span>01</span><h3>Intercept</h3>
+                        <p>You receive a phrase damaged by a chain of translations.</p>
+                        <ul class="step-facts"><li><strong>5</strong> rounds per session</li><li><strong>7</strong> language hops per round</li></ul>
+                    </article>
+                    <article>
+                        <span>02</span><h3>Decode</h3>
+                        <p>Submit your best guess before the round timer reaches zero.</p>
+                        <ul class="step-facts"><li><strong>60 sec</strong> for each round</li><li><strong>Unlimited</strong> guesses before timeout</li></ul>
+                    </article>
+                    <article>
+                        <span>03</span><h3>Replay</h3>
+                        <p>Watch each language step reveal where the phrase changed.</p>
+                        <ul class="step-facts"><li><strong>Full chain</strong> revealed after each round</li><li><strong>Final score</strong> after round five</li></ul>
+                    </article>
                 </div>
+                <section class="scoring-guide" aria-labelledby="scoring-title">
+                    <header class="scoring-heading">
+                        <p class="scoring-kicker">POINT PROTOCOL</p>
+                        <h3 id="scoring-title">Scoring system</h3>
+                        <p>Recover the original signal quickly and use traces carefully to protect your score.</p>
+                    </header>
+                    <div class="score-formula" aria-label="One hundred points minus elapsed seconds minus thirty points per trace equals the round score">
+                        <span><strong>100</strong><small>Starting points</small></span>
+                        <b aria-hidden="true">−</b>
+                        <span><strong>1</strong><small>Per second</small></span>
+                        <b aria-hidden="true">−</b>
+                        <span><strong>30</strong><small>Per trace</small></span>
+                        <b aria-hidden="true">=</b>
+                        <span class="score-result"><strong>Score</strong><small>Minimum 0</small></span>
+                    </div>
+                    <div class="score-rules">
+                        <article><span>Fast recovery</span><strong>Up to 100</strong><p>Solve immediately without a trace to secure the maximum round score.</p></article>
+                        <article><span>Signal decay</span><strong>−1 / second</strong><p>Every elapsed second removes one point from the round reward.</p></article>
+                        <article><span>Trace cost</span><strong>−30</strong><p>Each unique trace reduces only that round’s possible reward, never your saved total.</p></article>
+                    </div>
+                    <div class="verdict-bands" aria-label="Guess accuracy bands">
+                        <p><span class="verdict correct">Correct</span><strong>85%+</strong><small>Round solved</small></p>
+                        <p><span class="verdict close">Close</span><strong>60–84%</strong><small>Adjust and retry</small></p>
+                        <p><span class="verdict wrong">Wrong</span><strong>Below 60%</strong><small>Try again</small></p>
+                    </div>
+                </section>
             </section>
         </main>
         <script src="game_client/scripts/user.js"></script>

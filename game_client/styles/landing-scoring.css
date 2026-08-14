@@ -1,0 +1,5 @@
+/* Scoring-system entry point: edit the focused module that owns the UI area. */
+@import url("./landing-scoring-shell.css");
+@import url("./landing-scoring-formula.css");
+@import url("./landing-scoring-cards.css");
+@import url("./landing-scoring-responsive.css");

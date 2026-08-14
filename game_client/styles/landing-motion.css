@@ -1,0 +1,152 @@
+/* ================================================================
+   Landing page motion
+   Adjust durations and delays here without changing the page layout.
+   ================================================================ */
+
+/* Hold the hero slightly below its final position until JavaScript starts it. */
+body.landing-motion-ready .hero > .eyebrow,
+body.landing-motion-ready .hero > h1,
+body.landing-motion-ready .hero > .hero-text,
+body.landing-motion-ready .hero > .hero-buttons {
+    opacity: 0;
+    transform: translateY(0.65rem);
+}
+
+/* Reveal the hero copy with a small upward fade. */
+body.landing-motion-play .hero > .eyebrow,
+body.landing-motion-play .hero > h1,
+body.landing-motion-play .hero > .hero-text {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 520ms ease, transform 520ms ease;
+}
+
+/* Stagger the eyebrow, title, and supporting copy very slightly. */
+body.landing-motion-play .hero > .eyebrow {
+    transition-delay: 40ms;
+}
+
+body.landing-motion-play .hero > h1 {
+    transition-delay: 90ms;
+}
+
+body.landing-motion-play .hero > .hero-text {
+    transition-delay: 180ms;
+}
+
+/* Bring the buttons in after the title has settled. */
+body.landing-motion-play .hero > .hero-buttons {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 430ms ease 430ms, transform 430ms ease 430ms;
+}
+
+/* Create one thin neon scanline that crosses the hero on page load. */
+body.landing-motion-ready .hero::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 5%;
+    width: 90%;
+    height: 1px;
+    pointer-events: none;
+    opacity: 0;
+    background: linear-gradient(90deg, transparent, var(--blue), var(--pink), transparent);
+    box-shadow: 0 0 10px rgba(35, 224, 255, 0.85);
+}
+
+/* Run the scanline once; increase 900ms to slow its travel. */
+body.landing-motion-play .hero::after {
+    animation: landing-scanline 900ms ease-out 100ms both;
+}
+
+/* Glitch only the pink title line for roughly 300 milliseconds. */
+body.landing-motion-play .hero h1 span {
+    animation: landing-title-glitch 320ms steps(2, end) 160ms;
+}
+
+/* Hide each mission card only while the scroll observer is active. */
+body.landing-motion-ready .steps article {
+    opacity: 0;
+    transform: translateY(0.85rem);
+    transition:
+        opacity 440ms ease var(--card-delay, 0ms),
+        transform 440ms ease var(--card-delay, 0ms),
+        border-color 220ms ease,
+        box-shadow 220ms ease;
+}
+
+/* Reveal cards in the 120ms stagger assigned by landing-page.js. */
+body.landing-motion-ready .steps article.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Preserve the existing hover lift after a card has appeared. */
+body.landing-motion-ready .steps article.is-visible:hover {
+    transform: translateY(-0.2rem);
+    transition-delay: 0ms;
+}
+
+/* Move the scanline from the top to the bottom edge of the hero. */
+@keyframes landing-scanline {
+    0% {
+        opacity: 0;
+        top: 0;
+    }
+    15%, 72% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 0;
+        top: 100%;
+    }
+}
+
+/* Briefly split the title into cyan/pink signal shadows. */
+@keyframes landing-title-glitch {
+    0%, 100% {
+        opacity: 1;
+        transform: translateX(0);
+        text-shadow: 0 0 18px rgba(255, 42, 130, 0.35);
+    }
+    18% {
+        opacity: 0.35;
+        transform: translateX(-2px);
+        text-shadow: 3px 0 var(--blue), -3px 0 var(--pink);
+    }
+    38% {
+        opacity: 1;
+        transform: translateX(3px);
+        text-shadow: -4px 0 var(--blue), 4px 0 var(--pink);
+    }
+    56% {
+        opacity: 0.55;
+        transform: translateX(-1px);
+        text-shadow: 2px 0 var(--blue), -2px 0 var(--pink);
+    }
+    78% {
+        opacity: 1;
+        transform: translateX(1px);
+        text-shadow: -2px 0 var(--blue), 2px 0 var(--pink);
+    }
+}
+
+/* Respect the visitor's operating-system reduced-motion preference. */
+@media (prefers-reduced-motion: reduce) {
+    body.landing-motion-ready .hero > .eyebrow,
+    body.landing-motion-ready .hero > h1,
+    body.landing-motion-ready .hero > .hero-text,
+    body.landing-motion-ready .hero > .hero-buttons,
+    body.landing-motion-ready .steps article {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    body.landing-motion-play .hero::after,
+    body.landing-motion-play .hero h1 span {
+        animation: none;
+    }
+}

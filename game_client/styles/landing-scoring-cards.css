@@ -1,0 +1,104 @@
+/* Rule cards explain where each number in the formula comes from. */
+.score-rules {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.score-rules article {
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  background: rgba(3, 12, 18, 0.68);
+  clip-path: polygon(0.55rem 0, calc(100% - 0.55rem) 0, 100% 0.55rem, 100% calc(100% - 0.55rem), calc(100% - 0.55rem) 100%, 0.55rem 100%, 0 calc(100% - 0.55rem), 0 0.55rem);
+  transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+/* Matches the lift and cyan signal response used by the Intercept mission card. */
+.score-rules article:hover {
+  border-color: rgba(32, 217, 255, 0.62);
+  background: var(--surface-hover);
+  box-shadow: 0 0.8rem 1.8rem rgba(0, 0, 0, 0.25), 0 0 1rem rgba(32, 217, 255, 0.1);
+  transform: translateY(-0.2rem);
+}
+
+.score-rules span {
+  display: block;
+  color: var(--blue);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.score-rules strong {
+  display: block;
+  margin-top: 0.55rem;
+  color: var(--orange);
+  font-family: var(--display);
+  font-size: clamp(1.65rem, 3vw, 2.25rem);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.score-rules p {
+  margin: 0.7rem 0 0;
+  color: var(--muted-text);
+  line-height: 1.55;
+}
+
+/* Verdict rows expose the real similarity thresholds used by scoring.php. */
+.verdict-bands {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.verdict-bands p {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0.35rem 0.75rem;
+  margin: 0;
+  padding: 1rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.verdict-bands p:last-child {
+  border-right: 0;
+}
+
+.verdict {
+  padding: 0.22rem 0.45rem;
+  border: 1px solid currentColor;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.verdict.correct {
+  color: #7ff1c6;
+}
+
+.verdict.close {
+  color: var(--orange);
+}
+
+.verdict.wrong {
+  color: var(--pink);
+}
+
+.verdict-bands strong {
+  justify-self: end;
+  font-family: var(--display);
+  font-size: 1.3rem;
+}
+
+.verdict-bands small {
+  grid-column: 1 / -1;
+  color: var(--muted-text);
+}
+

@@ -1,0 +1,79 @@
+/* Stack scoring content on smaller screens so no formula or explanation is squeezed. */
+@media (max-width: 48rem) {
+  .score-formula {
+    grid-template-columns: 1fr auto 1fr;
+  }
+
+  .score-formula > b:nth-of-type(3),
+  .score-result {
+    grid-column: auto;
+  }
+
+  .score-result {
+    grid-column: 1 / -1;
+    padding-top: 0.9rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* On tablets and phones the rule cards become a swipeable, snapping score track. */
+  .score-rules {
+    grid-template-columns: repeat(3, minmax(16rem, 82vw));
+    padding: 0.3rem 0.1rem 0.85rem;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-behavior: smooth;
+    scroll-snap-type: inline mandatory;
+    scrollbar-color: var(--blue) rgba(255, 255, 255, 0.08);
+    scrollbar-width: thin;
+  }
+
+  .score-rules article {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  /* WebKit scrollbar styling keeps the scroll control inside the visual system. */
+  .score-rules::-webkit-scrollbar {
+    height: 0.42rem;
+  }
+
+  .score-rules::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .score-rules::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--blue), var(--pink));
+  }
+
+  .verdict-bands {
+    grid-template-columns: 1fr;
+  }
+
+  .verdict-bands p {
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .verdict-bands p:last-child {
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 34rem) {
+  .scoring-guide {
+    padding: 1.25rem;
+  }
+
+  .score-formula {
+    grid-template-columns: 1fr;
+  }
+
+  .score-formula > b {
+    transform: rotate(90deg);
+  }
+
+  .score-result {
+    grid-column: 1;
+  }
+}

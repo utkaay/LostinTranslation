@@ -1,0 +1,99 @@
+/* ================================================================
+   Hall of Fame terminal motion
+   All reveal and sorting animation controls live in this small module.
+   ================================================================ */
+
+/* Hold the intro elements until the terminal boot sequence begins. */
+body.hall-motion-ready .hall-intro .section-label,
+body.hall-motion-ready .hall-intro h1,
+body.hall-motion-ready .hall-intro .section-desc {
+    opacity: 0;
+    transform: translateY(0.45rem);
+}
+
+/* Fade the intro content into its final position. */
+body.hall-motion-play .hall-intro .section-label,
+body.hall-motion-play .hall-intro h1,
+body.hall-motion-play .hall-intro .section-desc {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 420ms ease, transform 420ms ease;
+}
+
+/* Delay the heading just enough to make the label feel like a boot prompt. */
+body.hall-motion-play .hall-intro h1 {
+    animation: hall-title-glow 620ms ease 100ms both;
+    transition-delay: 80ms;
+}
+
+/* Let the description follow the title rather than arriving at once. */
+body.hall-motion-play .hall-intro .section-desc {
+    transition-delay: 170ms;
+}
+
+/* New leaderboard rows begin just left of their final position. */
+.hall-row.row-enter {
+    opacity: 0;
+    transform: translateX(-1.35rem);
+}
+
+/* Each row uses the stagger delay assigned by hall-of-fame.js. */
+.hall-row.row-enter.row-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition:
+        opacity 380ms ease var(--row-delay, 0ms),
+        transform 380ms ease var(--row-delay, 0ms),
+        border-color 220ms ease,
+        background-color 220ms ease;
+}
+
+/* Existing rows slide right and fade before a sorted list replaces them. */
+.hall-row.row-exit,
+.hall-row.row-enter.row-enter-active.row-exit {
+    pointer-events: none;
+    opacity: 0;
+    transform: translateX(1rem);
+    transition:
+        opacity 210ms ease var(--exit-delay, 0ms),
+        transform 210ms ease var(--exit-delay, 0ms);
+}
+
+/* Add a restrained pulse while a score is counting toward its final value. */
+.mangle-score.is-counting {
+    text-shadow: 0 0 14px rgba(255, 42, 130, 0.55);
+}
+
+/* Flash the title from an overbright terminal state into its normal glow. */
+@keyframes hall-title-glow {
+    0% {
+        opacity: 0;
+        filter: blur(3px);
+        text-shadow: 0 0 28px rgba(35, 224, 255, 0.9);
+    }
+    45% {
+        opacity: 1;
+        filter: blur(0);
+        text-shadow: 0 0 24px rgba(255, 42, 130, 0.75);
+    }
+    100% {
+        opacity: 1;
+        filter: blur(0);
+        text-shadow: 0 0 12px rgba(35, 224, 255, 0.25);
+    }
+}
+
+/* Remove movement and count-up transitions for reduced-motion visitors. */
+@media (prefers-reduced-motion: reduce) {
+    body.hall-motion-ready .hall-intro .section-label,
+    body.hall-motion-ready .hall-intro h1,
+    body.hall-motion-ready .hall-intro .section-desc,
+    .hall-row.row-enter,
+    .hall-row.row-enter.row-enter-active,
+    .hall-row.row-exit {
+        opacity: 1;
+        transform: none;
+        transition: none;
+        animation: none;
+    }
+}
