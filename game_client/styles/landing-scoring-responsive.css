@@ -61,19 +61,52 @@
 }
 
 @media (max-width: 34rem) {
+  /* Reduce the outer shell padding so the scoring panel keeps useful phone width. */
   .scoring-guide {
     padding: 1.25rem;
   }
 
+  /* Reflow the long equation into a compact three-row mobile score ledger. */
   .score-formula {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    padding: 0.85rem;
   }
 
+  /* Hide desktop equation operators; deduction signs move beside their numbers below. */
   .score-formula > b {
-    transform: rotate(90deg);
+    display: none;
   }
 
-  .score-result {
-    grid-column: 1;
+  /* Give every score term a consistent compact touch-friendly reading area. */
+  .score-formula > span {
+    padding: 0.85rem 0.45rem;
+  }
+
+  /* Keep the starting score centered across the full first row. */
+  .score-formula > span:first-of-type {
+    grid-column: 1 / -1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Separate the time and trace deductions without creating oversized cards. */
+  .score-formula > span:nth-of-type(2) {
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Restore clear minus signs beside deduction values instead of vertical pink bars. */
+  .score-formula > span:nth-of-type(2) strong::before,
+  .score-formula > span:nth-of-type(3) strong::before {
+    margin-right: 0.08em;
+    color: var(--pink);
+    content: "−";
+  }
+
+  /* Finish with a full-width result row and a clear divider above it. */
+  .score-formula .score-result {
+    grid-column: 1 / -1;
+    margin-top: 0;
+    padding-top: 0.95rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
