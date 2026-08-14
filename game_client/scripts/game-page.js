@@ -16,6 +16,30 @@
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let timerId = null;
 
+    /* Keeps the live phrase and its CSS glitch copies in sync, replaying acquisition on change. */
+    function setPhrase(text) {
+        const changed = phrase.dataset.text !== text;
+        if (!changed && phrase.querySelector(".glitch-character")) return;
+
+        const characters = document.createDocumentFragment();
+        [...text].forEach((character, index) => {
+            const letter = document.createElement("span");
+            letter.className = "glitch-character";
+            letter.setAttribute("aria-hidden", "true");
+            letter.textContent = character === " " ? "\u00a0" : character;
+            letter.style.setProperty("--letter-delay", `${-((index * 0.37) % 3.1)}s`);
+            letter.style.setProperty("--letter-speed", `${2.2 + ((index % 5) * 0.31)}s`);
+            characters.append(letter);
+        });
+
+        phrase.replaceChildren(characters);
+        phrase.dataset.text = text;
+        phrase.setAttribute("aria-label", text);
+        if (!changed || reducedMotion) return;
+        phrase.classList.remove("signal-acquired");
+        window.requestAnimationFrame(() => phrase.classList.add("signal-acquired"));
+    }
+
     /* Formats seconds in the compact HUD clock format. */
     function formatTime(totalSeconds) {
         const minutes = Math.floor(Math.max(0, totalSeconds) / 60);
@@ -85,7 +109,8 @@
     }
 
     /* Publishes the small UI contract consumed by the game behavior modules. */
-    const ui = { timer, scoreElement, phrase, description, guessForm, guessInput, hintButton, submitButton, routeNodes, replayCards, reducedMotion, startTimer, stopTimer, renderSession, setFeedback, setControls, resetRound, showAction, setPhrase: (text) => { phrase.textContent = text; }, setDescription: (text) => { description.textContent = text; } };
+    setPhrase(phrase.textContent);
+    const ui = { timer, scoreElement, phrase, description, guessForm, guessInput, hintButton, submitButton, routeNodes, replayCards, reducedMotion, startTimer, stopTimer, renderSession, setFeedback, setControls, resetRound, showAction, setPhrase, setDescription: (text) => { description.textContent = text; } };
 
     /* Starts modules only after the page-level timer and decoder UI contract exists. */
     GameRound.initialize(ui);

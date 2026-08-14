@@ -1,0 +1,50 @@
+/* Hall introduction: section label, title, description, and pink signal rail. */
+.hall-page {
+    padding-block: clamp(3.5rem, 8vw, 6.75rem);
+}
+
+.hall-intro {
+    position: relative;
+    max-width: 46rem;
+    padding-left: clamp(1rem, 3vw, 2rem);
+    border-left: 2px solid var(--hall-pink);
+}
+
+.hall-intro::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -0.18rem;
+    width: 0.2rem;
+    content: "";
+    box-shadow: 0 0 1rem var(--hall-pink);
+}
+
+.section-label {
+    margin: 0;
+    color: var(--hall-cyan);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.hall-intro h1 {
+    margin: 0.65rem 0 0;
+    font-family: var(--hall-display);
+    font-size: clamp(3.5rem, 8vw, 6.7rem);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    line-height: 0.78;
+    text-transform: uppercase;
+    text-shadow: -0.025em 0 rgba(32, 217, 255, 0.32), 0.025em 0 rgba(255, 44, 138, 0.32);
+}
+
+.hall-intro > p:last-child {
+    max-width: 38rem;
+    margin: 1.25rem 0 0;
+    color: var(--hall-muted);
+    font-size: clamp(1rem, 1.5vw, 1.16rem);
+    line-height: 1.6;
+}
+

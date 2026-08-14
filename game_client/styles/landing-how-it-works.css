@@ -1,0 +1,70 @@
+/* Landing instructions: section heading and the three mission-step cards. */
+.how-it-works {
+  padding-block: clamp(4.5rem, 8vw, 6.5rem);
+  position: relative;
+  border-top: 1px solid var(--border);
+}
+
+.how-it-works h2 {
+  max-width: 42rem;
+  margin-top: 0.8rem;
+  font-family: var(--display);
+  font-size: clamp(2.7rem, 5.5vw, 4.7rem);
+  font-weight: 800;
+  letter-spacing: 0.015em;
+  line-height: 0.8;
+  text-transform: uppercase;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 2.75rem;
+}
+
+.steps article {
+  min-height: 14.5rem;
+  padding: 1.65rem;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  clip-path: polygon(0.7rem 0, calc(100% - 0.7rem) 0, 100% 0.7rem, 100% calc(100% - 0.7rem), calc(100% - 0.7rem) 100%, 0.7rem 100%, 0 calc(100% - 0.7rem), 0 0.7rem);
+  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.steps article:hover {
+  border-color: rgba(32, 217, 255, 0.62);
+  background: var(--surface-hover);
+  transform: translateY(-0.2rem);
+}
+
+.steps span {
+  display: block;
+  color: var(--orange);
+  font-family: var(--ui);
+  font-size: 0.85rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+}
+
+.steps h3 {
+  margin-top: 2rem;
+  font-family: var(--display);
+  font-size: 1.7rem;
+  letter-spacing: 0.02em;
+  line-height: 0.9;
+}
+
+.steps p {
+  margin: 0.65rem 0 0;
+  color: var(--muted-text);
+  line-height: 1.65;
+}
+
+:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 4px;
+}
+

@@ -1,0 +1,71 @@
+/* Hall foundations: design tokens, reset, page background, and shared content width. */
+
+:root {
+    --hall-bg: #030609;
+    --hall-surface: rgba(5, 14, 20, 0.92);
+    --hall-surface-hover: rgba(9, 27, 37, 0.98);
+    --hall-border: rgba(95, 188, 218, 0.28);
+    --hall-border-strong: rgba(32, 217, 255, 0.62);
+    --hall-text: #f3f0ea;
+    --hall-muted: #98a6ac;
+    --hall-cyan: #20d9ff;
+    --hall-pink: #ff2c8a;
+    --hall-orange: #ff9b31;
+    --hall-gold: #ffd363;
+    --hall-silver: #b7d1db;
+    --hall-bronze: #db8b4f;
+    --hall-page-width: 78rem;
+    --hall-gutter: clamp(1rem, 3vw, 2.5rem);
+    --hall-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+    --hall-ui: "Rajdhani", "Segoe UI", sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-width: 20rem;
+    background: var(--hall-bg);
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+    color: var(--hall-text);
+    font-family: var(--hall-ui);
+    background:
+        linear-gradient(rgba(63, 150, 182, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(63, 150, 182, 0.03) 1px, transparent 1px),
+        radial-gradient(ellipse at 50% -13%, rgba(32, 217, 255, 0.13), transparent 43%),
+        radial-gradient(ellipse at 89% 54%, rgba(255, 44, 138, 0.08), transparent 30%),
+        var(--hall-bg);
+    background-size: 3rem 3rem, 3rem 3rem, auto, auto, auto;
+}
+
+body::before {
+    position: fixed;
+    z-index: -1;
+    inset: 0;
+    content: "";
+    opacity: 0.38;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.012) 0,
+        rgba(255, 255, 255, 0.012) 1px,
+        transparent 1px,
+        transparent 4px
+    );
+}
+
+a {
+    color: inherit;
+}
+
+.game-header,
+.hall-page {
+    width: min(var(--hall-page-width), calc(100% - (var(--hall-gutter) * 2)));
+    margin-inline: auto;
+}

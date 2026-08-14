@@ -1,0 +1,54 @@
+/* Landing responsive rules: stacked layouts, smaller typography, and reduced motion. */
+@media (max-width: 48rem) {
+  .hero {
+    min-height: 34rem;
+  }
+
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .steps article {
+    min-height: auto;
+  }
+
+  .steps h3 {
+    margin-top: 1.25rem;
+  }
+}
+
+@media (max-width: 34rem) {
+  .site-header {
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.8rem;
+    padding-block: 1rem;
+  }
+
+  nav {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .hero {
+    min-height: 32rem;
+    padding-block: 4.5rem;
+  }
+
+  .hero-buttons {
+    display: grid;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}

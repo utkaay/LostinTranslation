@@ -1,0 +1,181 @@
+.decode-console {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(9.5rem, 0.28fr) minmax(15rem, 0.68fr);
+    grid-template-rows: 2.15rem minmax(4.75rem, 1fr);
+    gap: 0;
+    border: 0;
+    background: transparent;
+}
+
+.decode-console label {
+    display: flex;
+    align-items: end;
+    grid-column: 1;
+    grid-row: 1;
+    padding: 0.65rem 1.2rem 0.35rem;
+    border: 1px solid rgba(32, 217, 255, 0.72);
+    border-bottom: 0;
+    color: var(--game-cyan);
+    background: rgba(7, 20, 29, 0.94);
+    clip-path: polygon(0.8rem 0, 100% 0, 100% 100%, 0 100%, 0 0.8rem);
+}
+
+.decode-console input {
+    width: 100%;
+    min-width: 0;
+    grid-column: 1;
+    grid-row: 2;
+    padding: 0.45rem 1.2rem 0.95rem;
+    border: 1px solid rgba(32, 217, 255, 0.72);
+    border-top: 0;
+    border-radius: 0;
+    outline: 0;
+    color: var(--game-text);
+    font-family: var(--game-display);
+    font-size: clamp(1.65rem, 3vw, 2.7rem);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    caret-color: var(--game-cyan);
+    background:
+        linear-gradient(90deg, var(--game-cyan) 0 0) 1.2rem 50% / 0.22rem 64% no-repeat,
+        linear-gradient(135deg, rgba(32, 217, 255, 0.11), transparent 48%),
+        rgba(7, 20, 29, 0.94);
+    box-shadow: inset 0 0 1.75rem rgba(32, 217, 255, 0.07);
+    clip-path: polygon(0 0, calc(100% - 1.25rem) 0, 100% 1.25rem, 100% 100%, 0.8rem 100%, 0  calc(100% - 0.8rem));
+}
+
+.decode-console input::placeholder {
+    color: rgba(210, 219, 219, 0.38);
+    opacity: 1;
+}
+
+.decode-console input:focus {
+    border-color: var(--game-cyan);
+    background-color: rgba(9, 30, 42, 0.95);
+    box-shadow:
+        inset 0 0 1.75rem rgba(32, 217, 255, 0.13),
+        0 0 1.1rem rgba(32, 217, 255, 0.16);
+}
+
+.decode-console:focus-within label {
+    color: var(--game-text);
+    border-color: var(--game-cyan);
+}
+
+.hint-button,
+.submit-button {
+    position: relative;
+    display: grid;
+    place-content: center;
+    min-height: 100%;
+    border: 1px solid transparent;
+    border-radius: 0;
+    font-family: var(--game-display);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    line-height: 0.9;
+    cursor: pointer;
+    transition: border-color 170ms ease, box-shadow 170ms ease, color 170ms ease, transform 170ms ease;
+}
+
+.hint-button {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    margin-left: 0.8rem;
+    border-color: rgba(32, 217, 255, 0.54);
+    color: var(--game-cyan);
+    font-family: var(--game-ui);
+    font-size: clamp(0.9rem, 1.5vw, 1.15rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, rgba(32, 217, 255, 0.11), transparent 62%), #051119;
+    clip-path: polygon(0.8rem 0, calc(100% - 0.8rem) 0, 100% 0.8rem, 100% calc(100% - 0.8rem), calc(100% - 0.8rem) 100%, 0.8rem 100%, 0 calc(100% - 0.8rem), 0 0.8rem);
+}
+
+.hint-button span {
+    display: block;
+    margin-top: 0.45rem;
+    color: var(--game-orange);
+    font-family: var(--game-display);
+    font-size: clamp(2rem, 3vw, 3rem);
+    letter-spacing: 0.02em;
+}
+
+.submit-button {
+    grid-column: 3;
+    grid-row: 1 / -1;
+    margin-left: 0.8rem;
+    border-color: var(--game-orange);
+    color: #fff7ed;
+    font-size: clamp(2rem, 4vw, 3.55rem);
+    text-transform: uppercase;
+    background:
+        radial-gradient(circle at 77% 50%, rgba(255, 126, 24, 0.28), transparent 31%),
+        linear-gradient(90deg, rgba(255, 115, 17, 0.16), rgba(81, 25, 1, 0.76)),
+        #1c0b04;
+    box-shadow:
+        inset 0 0 0 0.15rem rgba(255, 170, 82, 0.22),
+        0 0 1.1rem rgba(255, 123, 25, 0.36);
+    clip-path: polygon(1rem 0, calc(100% - 1rem) 0, 100% 1rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 1rem 100%, 0 calc(100% - 1rem), 0 1rem);
+}
+
+.hint-button:hover,
+.hint-button:focus-visible {
+    border-color: var(--game-cyan);
+    box-shadow: 0 0 1.25rem rgba(32, 217, 255, 0.22);
+    transform: translateY(-0.13rem);
+}
+
+.submit-button:hover,
+.submit-button:focus-visible {
+    border-color: #ffd19f;
+    color: #ffffff;
+    box-shadow:
+        inset 0 0 0 0.15rem rgba(255, 210, 165, 0.4),
+        0 0 1.75rem rgba(255, 123, 25, 0.58);
+    transform: translateY(-0.13rem);
+}
+
+.hint-button:disabled,
+.submit-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.42;
+    box-shadow: none;
+    transform: none;
+}
+
+.feedback-message {
+    min-height: 1.4rem;
+    margin: -0.65rem 0 0;
+    color: var(--game-muted);
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-align: center;
+}
+
+.feedback-message[data-status="success"] {
+    color: #7ff1c6;
+}
+
+.feedback-message[data-status="error"] {
+    color: var(--game-pink);
+}
+
+.round-action {
+    display: flex;
+    justify-content: center;
+    min-height: 2.4rem;
+    margin-top: -0.55rem;
+}
+
+.round-action:empty {
+    display: none;
+}
+
+.round-action-button {
+    appearance: none;
+    min-width: 8.75rem;
+    padding: 0.7rem 1.1rem;
+}

@@ -1,0 +1,115 @@
+/* Hall responsive rules: tablet/mobile row layouts and reduced-motion accessibility. */
+@media (max-width: 62rem) {
+    .hall-head,
+    .hall-row {
+        grid-template-columns: 3.6rem minmax(11rem, 1.6fr) minmax(8rem, 1fr) minmax(5.2rem, 0.58fr) 5.1rem;
+    }
+
+    .hall-head span:nth-child(5),
+    .hall-row .votes {
+        display: none;
+    }
+}
+
+@media (max-width: 46rem) {
+    .game-header {
+        min-height: 5.5rem;
+    }
+
+    .hall-head {
+        display: none;
+    }
+
+    .hall-list {
+        border: 0;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .hall-row {
+        grid-template-columns: 3.3rem minmax(0, 1fr) auto;
+        grid-template-areas:
+            "rank mangled score"
+            "rank original score"
+            "rank votes vote";
+        row-gap: 0.5rem;
+        min-height: 0;
+        margin-bottom: 0.85rem;
+        padding: 1rem;
+        border: 1px solid var(--hall-border);
+        background: var(--hall-surface);
+        clip-path: polygon(0.7rem 0, calc(100% - 0.7rem) 0, 100% 0.7rem, 100% calc(100% - 0.7rem), calc(100% - 0.7rem) 100%, 0.7rem 100%, 0 calc(100% - 0.7rem), 0 0.7rem);
+    }
+
+    .rank {
+        grid-area: rank;
+    }
+
+    .mangled {
+        grid-area: mangled;
+    }
+
+    .original {
+        grid-area: original;
+    }
+
+    .mangle-score {
+        grid-area: score;
+        align-self: center;
+        text-align: right;
+    }
+
+    .votes {
+        display: block !important;
+        grid-area: votes;
+        align-self: center;
+        font-size: 1.12rem;
+    }
+
+    .votes::before {
+        margin-right: 0.3rem;
+        color: var(--hall-muted);
+        content: "Votes";
+        font-family: var(--hall-ui);
+        font-size: 0.65rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    .upvote-button {
+        grid-area: vote;
+    }
+}
+
+@media (max-width: 30rem) {
+    .game-header {
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.85rem;
+        padding-block: 1rem;
+    }
+
+    .hall-link {
+        align-self: stretch;
+        text-align: center;
+    }
+
+    .hall-intro h1 {
+        font-size: clamp(3.1rem, 17vw, 4.4rem);
+    }
+
+    .sort-buttons {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}

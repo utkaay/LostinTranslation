@@ -1,0 +1,58 @@
+/* Hall header: logo, navigation button, and header accent line. */
+.game-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 6.6rem;
+    border-bottom: 1px solid var(--hall-border);
+}
+
+.game-header::after {
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    height: 1px;
+    content: "";
+    background: linear-gradient(90deg, transparent, var(--hall-cyan) 22%, transparent 58%, var(--hall-pink) 78%, transparent);
+}
+
+.game-logo {
+    max-width: 13rem;
+    font-family: var(--hall-display);
+    font-size: clamp(1.6rem, 3vw, 2.65rem);
+    font-weight: 800;
+    letter-spacing: 0.025em;
+    line-height: 0.79;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-shadow: 0 0 1.1rem rgba(255, 255, 255, 0.12);
+}
+
+.game-logo span {
+    display: block;
+    color: var(--hall-pink);
+}
+
+.hall-link {
+    padding: 0.7rem 0.95rem;
+    border: 1px solid var(--hall-border);
+    color: var(--hall-cyan);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    line-height: 1;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: border-color 170ms ease, color 170ms ease, background-color 170ms ease;
+    clip-path: polygon(0.5rem 0, 100% 0, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0 100%, 0 0.5rem);
+}
+
+.hall-link:hover,
+.hall-link:focus-visible {
+    border-color: var(--hall-cyan);
+    color: var(--hall-text);
+    background: rgba(32, 217, 255, 0.1);
+}
+

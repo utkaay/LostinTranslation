@@ -30,7 +30,7 @@
 
         return payload.data;
     }
-
+    
     /* Sends URL-encoded POST fields because the existing PHP endpoints read $_POST. */
     function post(endpoint, fields) {
         const body = new URLSearchParams();

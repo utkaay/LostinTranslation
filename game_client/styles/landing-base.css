@@ -1,0 +1,71 @@
+/* Landing foundations: design tokens, reset, page background, and shared content width. */
+
+/* Landing page design tokens */
+:root {
+  --background: #030609;
+  --surface: rgba(5, 15, 22, 0.9);
+  --surface-hover: rgba(8, 28, 39, 0.96);
+  --border: rgba(82, 181, 217, 0.28);
+  --text: #f3f0ea;
+  --muted-text: #9fadb4;
+  --pink: #ff2c8a;
+  --blue: #20d9ff;
+  --orange: #ff9b31;
+  --page-width: 72rem;
+  --page-gutter: clamp(1.25rem, 4vw, 3rem);
+  --shadow: 0 1.25rem 3rem rgba(0, 0, 0, 0.35);
+  --display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --ui: "Rajdhani", "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 20rem;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  color: var(--text);
+  font-family: var(--ui);
+  line-height: 1.5;
+  background:
+    linear-gradient(rgba(62, 150, 188, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(62, 150, 188, 0.03) 1px, transparent 1px),
+    radial-gradient(ellipse at 10% 5%, rgba(32, 217, 255, 0.12), transparent 31rem),
+    radial-gradient(ellipse at 90% 74%, rgba(255, 44, 138, 0.1), transparent 30rem),
+    var(--background);
+  background-size: 3rem 3rem, 3rem 3rem, auto, auto, auto;
+}
+
+body::before {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  opacity: 0.35;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.012) 0,
+    rgba(255, 255, 255, 0.012) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+}
+
+a {
+  color: inherit;
+}
+
+.site-header,
+.hero,
+.how-it-works {
+  width: min(var(--page-width), calc(100% - (var(--page-gutter) * 2)));
+  margin-inline: auto;
+}

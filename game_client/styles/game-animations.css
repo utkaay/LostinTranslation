@@ -1,0 +1,255 @@
+/*
+ * MOTION TUNING GUIDE
+ * - A smaller duration (for example 2s instead of 4s) makes an effect happen more often.
+ * - Larger translate values make shaking and color separation stronger.
+ * - Lower opacity values make letters or layers less visible.
+ * - Keyframe percentages decide when an effect turns on during each animation cycle.
+ */
+
+/* Creates a separate stacking context so glitch layers stay behind the real phrase. */
+.transmission-panel {
+    isolation: isolate;
+}
+
+/* Change 4.2s to control the speed of the upper pink scan line. */
+.transmission-panel::before {
+    animation: signal-scan-upper 4.2s linear infinite;
+}
+
+/* Change 3.4s to control the speed of the lower scan line; reverse changes its direction. */
+.transmission-panel::after {
+    animation: signal-scan-lower 3.4s linear infinite reverse;
+}
+
+/* Makes the phrase the positioning container for its duplicate glitch layers. */
+.mangled-phrase {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    isolation: isolate;
+    text-wrap: balance;
+}
+
+/* Shared layout for the cyan and pink copies of the real phrase. */
+.mangled-phrase::before,
+.mangled-phrase::after {
+    position: absolute;
+    /* Negative vertical inset prevents letters such as g and y from being clipped. */
+    inset: -0.08em 0 -0.12em;
+    z-index: -1;
+    overflow: hidden;
+    content: attr(data-text);
+    pointer-events: none;
+    opacity: 0;
+    white-space: inherit;
+}
+
+/* Cyan copy: increase 0.045em for stronger separation; lower 3.8s for more frequent glitches. */
+.mangled-phrase::before {
+    color: rgba(32, 217, 255, 0.78);
+    text-shadow: -0.045em 0 var(--game-cyan);
+    animation: glitch-cyan 3.8s steps(1, end) infinite;
+}
+
+/* Pink copy: the 80ms delay stops both colored copies from glitching at exactly the same time. */
+.mangled-phrase::after {
+    color: rgba(255, 44, 138, 0.82);
+    text-shadow: 0.045em 0 var(--game-pink);
+    animation: glitch-pink 3.8s 80ms steps(1, end) infinite;
+}
+
+/* Combines the one-time loading distortion with the repeating full-phrase shake. */
+.mangled-phrase.signal-acquired {
+    animation:
+        signal-acquire 720ms steps(2, end) both,
+        /* Lower 3.4s for more frequent shaking; edit signal-jitter below for shake strength. */
+        signal-jitter 3.4s 760ms steps(1, end) infinite;
+}
+
+/* Each letter receives unique speed/delay variables from game-page.js for staggered dropouts. */
+.glitch-character {
+    display: inline-block;
+    animation: letter-dropout var(--letter-speed, 2.8s) var(--letter-delay, 0s) steps(1, end) infinite;
+}
+
+/* Slow brightness pulse on the timer; edit 1.8s to change its speed. */
+.timer strong {
+    animation: timer-breathe 1.8s ease-in-out infinite;
+}
+
+/* Cyan breathing glow around the currently active language node. */
+.route-node.active {
+    animation: active-node-pulse 2.1s ease-in-out infinite;
+}
+
+/* Quick scale-in when a route node becomes traced. */
+.route-node.revealed:not(.active) {
+    animation: trace-lock-in 420ms cubic-bezier(0.2, 0.8, 0.25, 1) both;
+}
+
+/* Quick upward reveal when a replay card becomes available. */
+.replay-card.revealed {
+    animation: trace-card-in 420ms cubic-bezier(0.2, 0.8, 0.25, 1) both;
+}
+
+/* Moving highlight across the orange submit button. */
+.submit-button::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    pointer-events: none;
+    background: linear-gradient(105deg, transparent 34%, rgba(255, 230, 198, 0.23) 49%, transparent 64%);
+    transform: translateX(-115%);
+    animation: submit-sweep 3.6s ease-in-out infinite;
+}
+
+/* Initial phrase appearance: blur, stretch, flicker, then settle into a readable signal. */
+@keyframes signal-acquire {
+    0% {
+        opacity: 0;
+        filter: blur(0.35rem);
+        transform: scaleX(1.15) skewX(-8deg);
+    }
+    18% {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateX(-0.08em) scaleX(0.96);
+    }
+    34% {
+        opacity: 0.42;
+        transform: translateX(0.12em) skewX(4deg);
+    }
+    48% {
+        opacity: 1;
+        transform: translateX(-0.04em);
+    }
+    72% {
+        clip-path: inset(0 0 42% 0);
+        transform: translateX(0.025em);
+    }
+    100% {
+        opacity: 1;
+        filter: none;
+        clip-path: inset(0);
+        transform: none;
+    }
+}
+
+/*
+ * Whole-phrase shake strength lives here.
+ * Increase translate values for a heavier shake; add more percentage steps for more bursts.
+ */
+@keyframes signal-jitter {
+    0%, 68%, 76%, 86%, 94%, 100% { transform: none; }
+    69% { transform: translate(-0.045em, -0.018em) skewX(-1.6deg); }
+    70% { transform: translate(0.065em, 0.014em) skewX(0.8deg); }
+    71% { transform: translate(-0.035em, 0.008em); }
+    72% { transform: translate(0.025em, -0.012em); }
+    73% { transform: none; }
+    87% { transform: translate(0.05em, -0.014em) skewX(1.2deg); }
+    88% { transform: translate(-0.055em, 0.016em) skewX(-0.8deg); }
+    89% { transform: translate(0.025em, 0); }
+    90% { transform: none; }
+    95% { transform: translate(-0.035em, 0.01em); }
+    96% { transform: translate(0.04em, -0.008em); }
+    97% { transform: none; }
+}
+
+/*
+ * Individual-letter corruption.
+ * opacity: 0 makes a letter disappear; the nearby percentage restores it almost immediately.
+ * Add another pair of dropout percentages to make letters vanish more frequently.
+ */
+@keyframes letter-dropout {
+    0%, 61%, 64%, 86%, 89%, 100% {
+        opacity: 1;
+        filter: none;
+    }
+    62% {
+        opacity: 0;
+        filter: blur(0.08em);
+    }
+    63% {
+        opacity: 0.16;
+        filter: none;
+    }
+    87% {
+        opacity: 0;
+        filter: blur(0.04em);
+    }
+    88% {
+        opacity: 0.38;
+        filter: none;
+    }
+}
+
+/* Horizontal cyan slices; clip-path chooses the visible strip and translateX offsets it. */
+@keyframes glitch-cyan {
+    0%, 78%, 100% { opacity: 0; clip-path: inset(0); transform: none; }
+    79% { opacity: 0.75; clip-path: inset(12% 0 66% 0); transform: translateX(-0.065em); }
+    80% { opacity: 0.45; clip-path: inset(58% 0 17% 0); transform: translateX(0.035em); }
+    81% { opacity: 0; }
+    91% { opacity: 0.58; clip-path: inset(37% 0 44% 0); transform: translateX(-0.04em); }
+    92% { opacity: 0; }
+}
+
+/* Horizontal pink slices, timed differently from cyan to create chromatic signal tearing. */
+@keyframes glitch-pink {
+    0%, 76%, 100% { opacity: 0; clip-path: inset(0); transform: none; }
+    77% { opacity: 0.68; clip-path: inset(68% 0 8% 0); transform: translateX(0.075em); }
+    78% { opacity: 0.4; clip-path: inset(24% 0 55% 0); transform: translateX(-0.025em); }
+    79% { opacity: 0; }
+    89% { opacity: 0.54; clip-path: inset(48% 0 31% 0); transform: translateX(0.045em); }
+    90% { opacity: 0; }
+}
+
+/* Moves and fades the upper scan line through the transmission panel. */
+@keyframes signal-scan-upper {
+    0%, 100% { top: 18%; opacity: 0.32; transform: translateX(-8%); }
+    44% { top: 36%; opacity: 0.86; transform: translateX(6%); }
+    52% { top: 38%; opacity: 0.18; }
+    84% { top: 13%; opacity: 0.72; transform: translateX(-2%); }
+}
+
+/* Moves and fades the lower scan line through the transmission panel. */
+@keyframes signal-scan-lower {
+    0%, 100% { bottom: 16%; opacity: 0.4; transform: translateX(7%); }
+    38% { bottom: 31%; opacity: 0.84; transform: translateX(-5%); }
+    47% { bottom: 34%; opacity: 0.2; }
+    82% { bottom: 11%; opacity: 0.7; transform: translateX(2%); }
+}
+
+/* Timer brightness range: edit 0.92 and 1.14 to reduce or increase the pulse. */
+@keyframes timer-breathe {
+    0%, 100% { filter: brightness(0.92); }
+    50% { filter: brightness(1.14); }
+}
+
+/* Active-node glow range: the final shadow in each frame controls the outer cyan bloom. */
+@keyframes active-node-pulse {
+    0%, 100% {
+        box-shadow: inset 0 0 0 0.3rem rgba(0, 0, 0, 0.28), 0 0 0 0.2rem rgba(32, 217, 255, 0.2), 0 0 1.15rem rgba(32, 217, 255, 0.55);
+    }
+    50% {
+        box-shadow: inset 0 0 0 0.3rem rgba(0, 0, 0, 0.2), 0 0 0 0.27rem rgba(32, 217, 255, 0.34), 0 0 1.85rem rgba(32, 217, 255, 0.92);
+    }
+}
+
+/* Traced node arrival: scale below 1 starts smaller; above 1 creates the overshoot. */
+@keyframes trace-lock-in {
+    0% { opacity: 0.45; transform: scale(0.82); }
+    64% { opacity: 1; transform: scale(1.06); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* Replay card arrival: change 0.5rem to adjust how far the card travels upward. */
+@keyframes trace-card-in {
+    0% { opacity: 0.48; transform: translateY(0.5rem); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Submit highlight travel: -115% starts left and 115% finishes right. */
+@keyframes submit-sweep {
+    0%, 58% { transform: translateX(-115%); }
+    78%, 100% { transform: translateX(115%); }
+}

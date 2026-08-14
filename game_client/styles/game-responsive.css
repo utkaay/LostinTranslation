@@ -1,0 +1,133 @@
+@media (max-width: 60rem) {
+    .game-header {
+        grid-template-columns: 1fr auto;
+    }
+
+    .hud {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
+}
+
+:focus-visible {
+    outline: 2px solid var(--game-cyan);
+    outline-offset: 3px;
+}
+
+@media (max-width: 42rem) {
+    .game-header {
+        grid-template-columns: 1fr auto;
+        gap: 0.75rem;
+        min-height: 5.5rem;
+        padding-block: 1rem;
+    }
+
+    .hud {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        grid-template-columns: 1.25fr 0.85fr 1fr;
+        clip-path: none;
+    }
+
+    .hud-item {
+        min-height: 5.5rem;
+        padding: 0.8rem;
+    }
+
+    .hud-item p {
+        font-size: 0.62rem;
+        letter-spacing: 0.08em;
+    }
+
+    .hud-item strong {
+        font-size: clamp(1.75rem, 9vw, 2.25rem);
+    }
+
+    .timer strong {
+        font-size: clamp(2.5rem, 13vw, 3.4rem);
+    }
+
+    .timer::before,
+    .timer::after {
+        display: none;
+    }
+
+    .translation-route h2::before,
+    .translation-route h2::after {
+        display: none;
+    }
+
+    .route-nodes {
+        justify-content: flex-start;
+        scroll-snap-type: x proximity;
+    }
+
+    .route-node {
+        scroll-snap-align: center;
+    }
+
+    .replay-feed {
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    .replay-heading::before,
+    .replay-heading::after {
+        display: none;
+    }
+
+    .replay-cards {
+        grid-template-columns: repeat(8, minmax(8rem, 1fr));
+        min-width: max-content;
+        scroll-snap-type: x proximity;
+    }
+
+    .replay-card {
+        scroll-snap-align: start;
+    }
+
+    .decode-console {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: 2.1rem 4.5rem 4.4rem;
+        gap: 0.65rem;
+    }
+
+    .decode-console label,
+    .decode-console input {
+        grid-column: 1 / -1;
+    }
+
+    .decode-console label {
+        grid-row: 1;
+    }
+
+    .decode-console input {
+        grid-row: 2;
+    }
+
+    .hint-button,
+    .submit-button {
+        grid-row: 3;
+        margin-left: 0;
+    }
+
+    .hint-button {
+        grid-column: 1;
+    }
+
+    .submit-button {
+        grid-column: 2;
+        font-size: clamp(1.65rem, 7vw, 2.25rem);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
