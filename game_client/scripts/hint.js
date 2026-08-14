@@ -26,15 +26,23 @@
     /* Connects the hint button to the round controller's request lifecycle. */
     function attach(ui, round) {
         ui.hintButton.addEventListener("click", async () => {
-            const session = round.getSession();
-            const stepIndex = next(session);
-            if (stepIndex === null || !round.beginRequest()) return;
+            let session = round.getSession();
+            if (next(session) === null || !round.beginRequest()) return;
+            /* The first hint reveals the first two hops (through Arabic); later hints reveal one. */
+            const count = (session.hintIndexes || []).length === 0 ? 2 : 1;
             ui.setFeedback("Tracing the next translation hop...");
             try {
-                const hint = await GameApi.useHint(session.activeRoundId, GameUser.getPlayerId(), stepIndex);
-                round.setSession(GameUser.addHint(hint));
-                render(hint, ui.routeNodes, ui.replayCards);
-                ui.setFeedback(`Trace unlocked. This hint costs ${hint.cost} points if you solve the round.`);
+                for (let i = 0; i < count; i += 1) {
+                    const stepIndex = next(session);
+                    if (stepIndex === null) break;
+                    const hint = await GameApi.useHint(session.activeRoundId, GameUser.getPlayerId(), stepIndex);
+                    session = GameUser.addHint(hint);
+                    round.setSession(session);
+                    render(hint, ui.routeNodes, ui.replayCards);
+                }
+                ui.setFeedback(count === 2
+                    ? "Two hops traced — the Arabic reveal is free. Each further hint costs 30 points if you solve the round."
+                    : "Trace unlocked. This hint costs 30 points if you solve the round.");
             } catch (error) {
                 ui.setFeedback(error.message, "error");
             } finally {

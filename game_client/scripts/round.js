@@ -37,6 +37,11 @@
         ui.stopTimer();
     }
 
+    /* Resolves after ms so a fast backend still shows the loading transmission glitch. */
+    function hold(ms) {
+        return new Promise((resolve) => window.setTimeout(resolve, ms));
+    }
+
     /* Checks server-owned time and closes the round when PHP reports it is finished. */
     async function checkState() {
         if (pending || !session?.activeRoundId || session.activeRoundComplete) return;
@@ -54,9 +59,16 @@
     async function create() {
         pending = true;
         ui.setControls(false, false);
+        /* Shows the glitching "Loading transmission…" state on every new round, not just first load. */
+        ui.setPhrase("Loading transmission…");
+        ui.setDescription("Preparing a new translation chain.");
         ui.setFeedback("Generating a corrupted transmission...");
         try {
-            const round = await GameApi.createRound(session.playedRoundIds || []);
+            /* Holds the loading glitch for a visible minimum even when the backend responds instantly. */
+            const [round] = await Promise.all([
+                GameApi.createRound(session.playedRoundIds || []),
+                hold(ui.reducedMotion ? 0 : 700),
+            ]);
             session = GameUser.setActiveRound(round.round_id);
             ui.resetRound();
             ui.renderSession(session);

@@ -36,8 +36,12 @@ try {
             $response["success"] = false;
             $response["message"] = "round is closed";
         } else {
-            // count this player's hints on this round (server-side, not trusted from the client)
-            $sql = "SELECT COUNT(*) AS n FROM hints WHERE round_id = ? AND player_id = ?";
+            // count this player's billable hints on this round (server-side, not trusted from
+            // the client). The Arabic hop is a free reveal, so exclude it from the cost.
+            $sql = "SELECT COUNT(*) AS n
+                    FROM hints h
+                    JOIN steps s ON s.round_id = h.round_id AND s.step_index = h.step_index
+                    WHERE h.round_id = ? AND h.player_id = ? AND s.to_lang <> 'ar'";
             $query = $mysql->prepare($sql);
             $query->bind_param("is", $round_id, $player_id);
             $query->execute();
